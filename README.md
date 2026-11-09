@@ -177,20 +177,20 @@ PORT=3000
 NODE_ENV=development
 
 # PostgreSQL Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=password_postgres_anda
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
 DB_NAME=ftp_migration
 
 # FTP Configuration
 FTP_ENABLED=true
-FTP_HOST=103.149.208.24
-FTP_PORT=21
+FTP_HOST=
+FTP_PORT=
 FTP_USER=username_ftp
 FTP_PASSWORD=password_ftp
-FTP_SECURE=false
-FTP_TIMEOUT=30000
+FTP_SECURE=
+FTP_TIMEOUT=
 
 # Folder Target Remote di FTP
 # Pilihan 1: Satu folder     -> /ucl11112
