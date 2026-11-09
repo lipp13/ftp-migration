@@ -83,18 +83,18 @@ async function saveMeasurements(records, batchSize = 500) {
 }
 
 /**
- * Mengambil ringkasan statistik data dari tabel arr_ftp
+ * Mengambil ringkasan statistik data dari tabel arr_ftp dan ftp_sync_files
  * @returns {Promise<Object>}
  */
 async function getMeasurementStats() {
   const res = await pool.query(`
     SELECT 
-      COUNT(*) AS total_rows,
-      COUNT(DISTINCT id_logger) AS total_loggers,
-      COUNT(DISTINCT channel) AS total_channels,
-      MIN(recorded_at) AS earliest_record,
-      MAX(recorded_at) AS latest_record
-    FROM arr_ftp;
+      (SELECT COUNT(*) FROM arr_ftp) AS total_rows,
+      (SELECT COUNT(*) FROM ftp_sync_files WHERE sync_status IN ('INGESTED', 'SYNCED')) AS total_files,
+      (SELECT COUNT(DISTINCT id_logger) FROM arr_ftp) AS total_loggers,
+      (SELECT COUNT(DISTINCT channel) FROM arr_ftp) AS total_channels,
+      (SELECT MIN(recorded_at) FROM arr_ftp) AS earliest_record,
+      (SELECT MAX(recorded_at) FROM arr_ftp) AS latest_record;
   `);
   return res.rows[0];
 }

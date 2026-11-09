@@ -7,9 +7,14 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test:db": "node src/scripts/test-db.js",
+    "test:ftp": "node src/scripts/test-ftp.js",
     "test:parser": "node src/scripts/test-parser.js",
     "test:insert": "node src/scripts/test-insert.js",
-    "test:sim": "node src/scripts/test-simulation.js"
+    "test:sim": "node src/scripts/test-simulation.js",
+    "migrate:sync": "node src/scripts/migrate-sync.js",
+    "reset:all": "node src/scripts/reset-demo.js",
+    "restore:local": "node src/scripts/reingest-local.js",
+    "sync:initial": "node src/scripts/initial-sync.js"
   },
   "keywords": [],
   "author": "",

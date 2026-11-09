@@ -398,8 +398,8 @@
         <div id="stat-live-events" class="card-value">0</div>
       </div>
       <div class="card">
-        <div class="card-title">Logger Terdaftar</div>
-        <div id="stat-loggers" class="card-value">-</div>
+        <div class="card-title">Total File Diambil</div>
+        <div id="stat-total-files" class="card-value">-</div>
       </div>
       <div class="card">
         <div class="card-title">Channel Aktif</div>
@@ -565,13 +565,19 @@
         const json = await res.json();
         if (json.status === 'success') {
           document.getElementById('stat-total-rows').textContent = Number(json.data.total_rows || 0).toLocaleString('id-ID');
-          document.getElementById('stat-loggers').textContent = json.data.total_loggers || 0;
+          const fileEl = document.getElementById('stat-total-files');
+          if (fileEl) {
+            fileEl.textContent = Number(json.data.total_files || 0).toLocaleString('id-ID');
+          }
           document.getElementById('stat-channels').textContent = json.data.total_channels || 0;
         }
       } catch (e) {
         console.error('Failed to fetch stats:', e);
       }
     }
+
+    // Refresh statistik secara periodik agar metrik file selalu realtime
+    setInterval(fetchStats, 3000);
 
     async function loadHistory() {
       try {
